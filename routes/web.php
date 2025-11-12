@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,10 +12,12 @@ Route::get('/admin', function () {
     return view('admin.index');
 });
 
-// platform users
+// platform users (Admin Users page)
 Route::get('/admin/users', function () {
-    return response('<h1>Platform Users</h1>');
+    $admins = User::all(); // fetch all users; later you can filter for admins if needed
+    return view('admin.admin_users', compact('admins'));
 });
+
 
 // user profile page
 Route::get('/admin/users/{username}', function ($username) {
